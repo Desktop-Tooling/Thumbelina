@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thumbdrive Multiboot — modes</title>
+  <style>
+    :root {
+      --bg: #f3f0e8;
+      --ink: #1c1a16;
+      --accent: #0b6e4f;
+      --card: #fffdf8;
+      --line: #cfc6b6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #d9efe4 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #efe4d2 0%, transparent 50%),
+        var(--bg);
+      line-height: 1.45;
+    }
+    header, main { max-width: 960px; margin: 0 auto; padding: 1.25rem; }
+    nav.identity a { color: var(--accent); text-decoration: none; margin-right: 0.5rem; }
+    .vcs { margin: 0.5rem 0 1.25rem; }
+    .vcs a { color: var(--ink); font-weight: 600; }
+    h1 { font-size: 1.75rem; margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+    .lede { max-width: 42rem; margin-bottom: 1.5rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    article {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem;
+      min-height: 11rem;
+    }
+    article h2 { font-size: 1.1rem; margin: 0 0 0.5rem; color: var(--accent); }
+    .mock {
+      margin-top: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #1e1f22;
+      color: #e8e6e3;
+      padding: 1rem 1rem 1.25rem;
+      pointer-events: none;
+      aspect-ratio: 1122 / 585;
+      display: flex;
+      flex-direction: column;
+    }
+    .caption {
+      font: 12px/1.2 Consolas, monospace;
+      opacity: 0.7;
+      margin-bottom: 0.75rem;
+    }
+    .bars { display: flex; gap: 0.35rem; height: 2.5rem; align-items: stretch; }
+    .bars span {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; border-radius: 6px; padding: 0 0.4rem;
+    }
+    .esp { background: #3d5a80; flex: 0 0 12%; }
+    .exfat { background: #0b6e4f; flex: 1; }
+    .btrfs { background: #9a3412; flex: 1; }
+    .service { background: #0b6e4f; flex: 0 0 18%; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="identity" aria-label="Site">
+      <a href="https://desktop-tooling.github.io/">Desktop-Tooling</a> /
+      <a href="https://desktop-tooling.github.io/demos/">Demos</a> /
+      <span>Thumbdrive Multiboot</span>
+    </nav>
+    <div class="vcs">
+      <a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot">GitHub repository</a>
+    </div>
+    <h1>Three ways to use one flash drive</h1>
+    <p class="lede">
+      Pick live ISOs for a toolkit stick, installed Linux systems for a thin daily-driver pool,
+      or both when the stick is large enough. Windows always sees a branded volume so the drive
+      is not a mystery.
+    </p>
+  </header>
+  <main>
+    <div class="grid">
+      <article>
+        <h2>Live ISOs</h2>
+        <p>Big exFAT drop zone. Copy ISO files in Explorer, boot, pick from the menu.</p>
+      </article>
+      <article>
+        <h2>Installed OSes</h2>
+        <p>Small service exFAT plus a Btrfs pool of subvolumes that share free space.</p>
+      </article>
+      <article>
+        <h2>Both</h2>
+        <p>Sized ISO partition and install pool together. Two sticks are fine when space is tight.</p>
+      </article>
+    </div>
+
+    <figure class="mock" aria-label="Partition sketch">
+      <div class="caption">Installed mode sketch — ESP · service exFAT · Btrfs pool</div>
+      <div class="bars">
+        <span class="esp">ESP</span>
+        <span class="service">Service</span>
+        <span class="btrfs">Btrfs pool</span>
+      </div>
+      <div class="caption" style="margin-top:1rem">Live mode sketch — ESP · exFAT (ISOs + kit)</div>
+      <div class="bars">
+        <span class="esp">ESP</span>
+        <span class="exfat">exFAT drop + service kit</span>
+      </div>
+    </figure>
+  </main>
+</body>
+</html>

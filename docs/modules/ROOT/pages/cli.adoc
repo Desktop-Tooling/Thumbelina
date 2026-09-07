@@ -1,0 +1,26 @@
+= CLI
+:description: tmb command reference.
+:page-audience: end-user
+
+Build:
+
+[source,bash]
+----
+dub build --config=application
+----
+
+Binary: `bin/tmb` (or `bin/tmb.exe`).
+
+Useful commands:
+
+[source,bash]
+----
+tmb modes
+tmb disks
+tmb plan --mode live-iso --size-gib 64
+tmb plan --mode both --disk 2 --exfat-gib 32
+tmb write-payload --mount E:\ --mode installed --instance demo
+tmb format --mode installed --disk 2   # dry-run unless --yes (execute still stubbed)
+tmb about
+tmb debug-dump
+----

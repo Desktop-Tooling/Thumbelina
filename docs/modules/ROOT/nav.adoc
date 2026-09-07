@@ -1,0 +1,6 @@
+* xref:index.adoc[Thumbdrive Multiboot]
+* xref:modes.adoc[Drive modes]
+* xref:layout.adoc[Disk layout]
+* xref:install-engine.adoc[Install engine]
+* xref:cli.adoc[CLI]
+* xref:gui.adoc[GUI]

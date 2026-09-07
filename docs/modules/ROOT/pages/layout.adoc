@@ -1,0 +1,37 @@
+= Disk layout
+:description: GPT partitions for Thumbdrive Multiboot.
+:page-audience: end-user
+
+All layouts use GPT.
+
+[cols="1,2,3"]
+|===
+| Mode | Partitions | Windows-visible
+
+| Live ISOs
+| ESP FAT32 + exFAT (remainder)
+| Branded exFAT (ISOs + service kit)
+
+| Installed
+| ESP FAT32 + service exFAT (~256 MiB) + Btrfs (remainder)
+| Service exFAT only
+
+| Both
+| ESP FAT32 + exFAT (sized) + Btrfs (remainder)
+| exFAT (ISOs + service kit)
+|===
+
+== Service kit
+
+Written to the Windows-visible exFAT on every mode:
+
+* `README.txt`, `VERSION.txt`, `links.txt`, `instance.json`
+* `docs/` how-tos
+* `tools/` host binaries (native per OS/arch; optional polyglot experiment)
+* `isos/` folder (primary on Live/Both)
+
+Volume label defaults to `Thumbdrive Multiboot`.
+
+== Boot
+
+GRUB EFI on the ESP. Live ISOs via GRUB `loopback` (no Ventoy runtime hook). Installed systems via `rootflags=subvol=...` into Btrfs subvolumes, with optional `compress=zstd`.

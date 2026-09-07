@@ -1,0 +1,40 @@
+name "thumbdrive-multiboot"
+description "Format and manage multiboot USB sticks: live ISOs, thin Btrfs-installed distros, or both."
+authors "AMDphreak"
+license "MIT"
+copyright "Copyright © 2026, Desktop-Tooling"
+homepage "https://github.com/Desktop-Tooling/Thumbdrive-Multiboot"
+
+targetType "library"
+targetPath "bin"
+targetName "thumbdrive-multiboot"
+sourcePaths "source/lib"
+importPaths "source/lib"
+stringImportPaths "service-payload"
+
+configuration "library" {
+}
+
+configuration "application" {
+    targetType "executable"
+    targetName "tmb"
+    mainSourceFile "source/cli/app.d"
+    sourceFiles "source/cli/app.d"
+    versions "TmbCli"
+}
+
+configuration "gui" {
+    targetType "executable"
+    targetName "thumbdrive-multiboot"
+    mainSourceFile "source/gui/app.d"
+    sourceFiles "source/gui/app.d"
+    versions "TmbGui"
+    dependency "dlangui" version="~>0.9.186"
+}
+
+configuration "unittest" {
+    targetType "executable"
+    targetName "thumbdrive-multiboot-test"
+    mainSourceFile "tests/runner.d"
+    sourceFiles "tests/runner.d"
+}

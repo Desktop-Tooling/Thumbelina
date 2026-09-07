@@ -1,0 +1,18 @@
+{{APP_NAME}} — overview
+=======================
+
+Three usage paths (reconfigurable later):
+
+1) Live ISOs
+   ESP + large exFAT. Drag .iso files into isos/. Best for toolkit/rescue sticks.
+
+2) Installed OSes
+   ESP + small service exFAT (this volume) + Btrfs pool for thin subvolume installs
+   with optional zstd compression and snapshots.
+
+3) Both
+   ESP + sized exFAT (ISOs + this kit) + remaining Btrfs pool.
+   Prefer two specialized sticks when capacity is tight.
+
+Windows sees this branded exFAT volume so the stick is identifiable even when
+installed systems live only on Btrfs.

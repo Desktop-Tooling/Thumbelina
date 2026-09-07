@@ -1,0 +1,4 @@
+Homepage: {{HOMEPAGE_URL}}
+Docs:     {{DOCS_URL}}
+Issues:   {{ISSUES_URL}}
+Org:      {{ORG_NAME}}

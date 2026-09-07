@@ -1,0 +1,6 @@
+{{APP_NAME}}
+version={{APP_VERSION}}
+build={{APP_BUILD}}
+mode={{MODE_ID}}
+instance={{INSTANCE_ID}}
+created={{CREATED_AT}}

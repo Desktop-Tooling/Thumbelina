@@ -1,0 +1,21 @@
+= GUI
+:description: Desktop UI for Thumbdrive Multiboot.
+:page-audience: end-user
+
+Build:
+
+[source,bash]
+----
+dub build --config=gui
+----
+
+The first-pass GUI (dlangui) lets you:
+
+* Refresh and pick a physical disk
+* Choose mode (Live / Installed / Both)
+* Set volume label and Both-mode exFAT size
+* Preview a format plan
+* About + redacted debug dump
+* Format button (confirmation path wired; wipe still stubbed)
+
+Product essentials still ahead of 1.0: signed installer, auto-update, fuller Help, MSI/winget (Windows).

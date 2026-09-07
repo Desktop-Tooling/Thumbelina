@@ -1,0 +1,19 @@
+= Thumbdrive Multiboot
+:description: Multiboot USB sticks with live ISOs, thin Btrfs installs, or both.
+:page-audience: end-user
+:page-usage-context: product-docs
+
+Thumbdrive Multiboot formats and manages USB sticks for three jobs: **live ISO toolkits**, **thin installed Linux systems**, or **both** on one drive when capacity allows.
+
+Unlike Ventoy-style ISO-only tools, installed mode places full distros in **Btrfs subvolumes** (shared free space, optional zstd compression, snapshots). Every mode still presents a **branded exFAT volume** in Windows File Explorer so the stick is identifiable and, in live/both modes, accepts drag-and-drop ISOs.
+
+== Quick links
+
+* xref:modes.adoc[Drive modes]
+* xref:layout.adoc[Disk layout]
+* xref:cli.adoc[CLI (`tmb`)]
+* xref:gui.adoc[GUI]
+
+== Status
+
+Version 0.1.0 scaffolds the library, CLI, and GUI: layout planning, disk listing, service-payload stamping, and dry-run format plans. Destructive format execute and distro install orchestration are next.

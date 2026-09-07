@@ -1,0 +1,30 @@
+= Install engine
+:description: How distros get onto the Btrfs pool.
+:page-audience: developer
+
+There is no universal “install any Linux ISO from outside a live environment” standard. Thumbdrive Multiboot will wrap per-family tools:
+
+== Preferred: rootfs / bootstrap
+
+* Debian/Ubuntu: `debootstrap` / rootfs tarballs
+* Arch: bootstrap tarball / `pacstrap`-equivalent unpack
+* Fedora: `dnf --installroot` or container root layers
+* Alpine / others: OCI or minirootfs
+
+Result: unpack into a named Btrfs subvolume, then regenerate GRUB.
+
+== Fallback: unattended installer in a helper VM
+
+Attach the USB (or its Btrfs partition) to headless QEMU/Hyper-V and feed:
+
+* Ubuntu autoinstall
+* Debian preseed
+* Fedora/RHEL kickstart
+* Arch `archinstall` config
+
+== Host matrix
+
+* **Linux:** native partition + `btrfs-progs` + bootstrap
+* **Windows / macOS:** helper Linux VM with the raw disk attached (Btrfs is not writable in Explorer)
+
+GUI and CLI share the same library API for plan → confirm → execute.

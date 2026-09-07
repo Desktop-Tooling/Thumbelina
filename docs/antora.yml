@@ -1,0 +1,6 @@
+name: thumbdrive-multiboot
+title: Thumbdrive Multiboot
+version: 0.1.0
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/nav.adoc

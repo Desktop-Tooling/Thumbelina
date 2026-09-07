@@ -1,0 +1,21 @@
+= Drive modes
+:description: Live ISO, installed, and hybrid USB layouts.
+:page-audience: end-user
+
+Pick a mode when formatting. You can reconfigure later (may require migrate or wipe).
+
+== Live ISOs
+
+ESP (FAT32) + large **exFAT**. Copy `.iso` files into `isos/` in Explorer. Best for rescue and toolkit sticks.
+
+== Installed OSes
+
+ESP + **small service exFAT** (README, version, docs, tools) + **Btrfs** pool for thin subvolume installs. Windows does not browse the Btrfs pool; use the app to manage installs.
+
+== Both
+
+ESP + sized exFAT (ISOs + service kit) + remaining Btrfs. Prefer **two specialized sticks** when the drive is small; use Both when you have enough capacity (often 128 GiB+).
+
+== Recommendation
+
+Most people will keep live toolkits on one stick and installed systems on another. The app supports that explicitly instead of forcing a hybrid layout.
