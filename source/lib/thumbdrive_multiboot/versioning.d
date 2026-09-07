@@ -1,7 +1,7 @@
 module thumbdrive_multiboot.versioning;
 
 /// Marketing / SemVer product version (stamped at release).
-enum string appVersion = "0.1.0";
+enum string appVersion = "0.2.0";
 
 /// Build id placeholder — CI should replace via -version= or -J.
 enum string appBuildId = "dev";

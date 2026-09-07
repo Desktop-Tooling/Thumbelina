@@ -11,9 +11,29 @@ Unlike Ventoy-style ISO-only tools, installed mode places full distros in **Btrf
 
 * xref:modes.adoc[Drive modes]
 * xref:layout.adoc[Disk layout]
+* xref:install-engine.adoc[Install engine]
 * xref:cli.adoc[CLI (`tmb`)]
 * xref:gui.adoc[GUI]
 
-== Status
+== Host capabilities
 
-Version 0.1.0 scaffolds the library, CLI, and GUI: layout planning, disk listing, service-payload stamping, and dry-run format plans. Destructive format execute and distro install orchestration are next.
+[cols="1,2,2"]
+|===
+| Task | Linux | Windows
+
+| Format live-iso
+| Yes
+| Yes (PowerShell)
+
+| Format installed / both
+| Yes
+| Helper script → Linux live/VM (`tmb helper-script`)
+
+| Refresh GRUB / ISO menu
+| Yes
+| Yes (mounted volumes)
+
+| Bootstrap distro into subvolume
+| Yes (`debootstrap` / `pacstrap` / `dnf` / tar)
+| Via Linux helper / VM
+|===

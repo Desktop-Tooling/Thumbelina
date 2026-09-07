@@ -3,6 +3,9 @@ module guiapp;
 import dlangui;
 import std.conv : to;
 import std.format : format;
+import std.file : mkdirRecurse, tempDir;
+import std.path : buildPath;
+import std.uuid : randomUUID;
 
 import thumbdrive_multiboot;
 
@@ -11,7 +14,7 @@ mixin APP_ENTRY_POINT;
 extern (C) int UIAppMain(string[] args)
 {
     auto window = Platform.instance.createWindow(
-            appName ~ " " ~ appVersion, null, WindowFlag.Resizable, 920, 680);
+            appName ~ " " ~ appVersion, null, WindowFlag.Resizable, 960, 720);
     window.mainWidget = new MainFrame();
     window.show();
     return Platform.instance.enterMessageLoop();
@@ -33,12 +36,11 @@ final class MainFrame : VerticalLayout
         layoutWidth = FILL_PARENT;
         layoutHeight = FILL_PARENT;
         padding = Rect(16, 16, 16, 16);
-        margins = Rect(4, 4, 4, 4);
 
         addChild(new TextWidget(null,
-                "Format a USB stick for live ISOs, thin Btrfs installs, or both."d));
+                "Format USB sticks for live ISOs, thin Btrfs installs, or both."d));
         addChild(new TextWidget(null,
-                "Every mode gets a branded Windows-visible exFAT volume with README, version stamp, docs, and tools."d));
+                "Every mode gets a branded Windows-visible exFAT volume (README, version, docs, tools)."d));
 
         auto rowDisk = new HorizontalLayout();
         rowDisk.addChild(new TextWidget(null, "Disk:"d));
@@ -73,18 +75,11 @@ final class MainFrame : VerticalLayout
         addChild(rowExfat);
 
         auto rowBtns = new HorizontalLayout();
-        auto planBtn = new Button("plan", "Preview plan"d);
-        planBtn.click = &onPlan;
-        rowBtns.addChild(planBtn);
-        auto aboutBtn = new Button("about", "About"d);
-        aboutBtn.click = &onAbout;
-        rowBtns.addChild(aboutBtn);
-        auto dumpBtn = new Button("dump", "Debug dump"d);
-        dumpBtn.click = &onDump;
-        rowBtns.addChild(dumpBtn);
-        auto formatBtn = new Button("format", "Format (stub)"d);
-        formatBtn.click = &onFormat;
-        rowBtns.addChild(formatBtn);
+        addBtn(rowBtns, "plan", "Preview plan", &onPlan);
+        addBtn(rowBtns, "format", "Format", &onFormat);
+        addBtn(rowBtns, "helper", "Linux helper script", &onHelper);
+        addBtn(rowBtns, "about", "About", &onAbout);
+        addBtn(rowBtns, "dump", "Debug dump", &onDump);
         addChild(rowBtns);
 
         _planBox = new EditBox("planBox", ""d);
@@ -95,8 +90,14 @@ final class MainFrame : VerticalLayout
 
         _status = new TextWidget("status", "Ready."d);
         addChild(_status);
-
         reloadDisks();
+    }
+
+    void addBtn(HorizontalLayout row, string id, string label, bool delegate(Widget) handler)
+    {
+        auto b = new Button(id, label.to!dstring);
+        b.click = handler;
+        row.addChild(b);
     }
 
     bool onRefresh(Widget src)
@@ -113,7 +114,7 @@ final class MainFrame : VerticalLayout
         foreach (d; _disks)
             items ~= describeDisk(d).to!dstring;
         if (!items.length)
-            items ~= "(no disks found — try running as admin / on Linux)"d;
+            items ~= "(no disks found)"d;
         _diskBox.items = items;
         _diskBox.selectedItemIndex = 0;
     }
@@ -136,16 +137,13 @@ final class MainFrame : VerticalLayout
         DiskInfo disk;
         if (_disks.length && _diskBox.selectedItemIndex >= 0
                 && _diskBox.selectedItemIndex < cast(int) _disks.length)
-        {
             disk = _disks[_diskBox.selectedItemIndex];
-        }
         else
         {
             disk.id = "none";
             disk.devicePath = "";
             disk.sizeBytes = 64UL * 1024 * 1024 * 1024;
             disk.removable = true;
-            disk.model = "none";
         }
 
         LayoutOptions opts;
@@ -176,17 +174,33 @@ final class MainFrame : VerticalLayout
         auto plan = currentPlan(true);
         _planBox.text = describeFormatPlan(plan).to!dstring;
         auto result = executeFormat(plan);
-        _status.text = result.message.to!dstring;
-        window.showMessageBox("Format"d, result.message.to!dstring);
+        _planBox.text = (_planBox.text.to!string ~ "\n\n" ~ result.message).to!dstring;
+        _status.text = (result.success ? "Format succeeded." : "Format failed — see plan output.").to!dstring;
+        window.showMessageBox(result.success ? "Format"d : "Format failed"d, result.message.to!dstring);
+        return true;
+    }
+
+    bool onHelper(Widget src)
+    {
+        auto plan = currentPlan(true);
+        auto dir = buildPath(tempDir, "tmb-helper-" ~ randomUUID().toString());
+        mkdirRecurse(dir);
+        FormatExecuteOptions opts;
+        opts.instanceId = randomUUID().toString();
+        auto script = writeLinuxFormatHelper(dir, plan, opts);
+        auto msg = "Wrote helper to:\n" ~ dir ~ "\n" ~ script;
+        _planBox.text = msg.to!dstring;
+        _status.text = "Linux helper script written."d;
+        window.showMessageBox("Helper script"d, msg.to!dstring);
         return true;
     }
 
     bool onAbout(Widget src)
     {
-        auto body = format("%s\n\nHomepage: %s\nDocs: %s\nIssues: %s\n\n%s",
-                versionLine(), homepageUrl, docsUrl, issuesUrl,
-                "Modes: live ISO, installed (Btrfs), or both. Service exFAT on every stick.")
-            .to!dstring;
+        auto body = format("%s\n\n%s\n\nHomepage: %s\nDocs: %s",
+                versionLine(),
+                "Format / GRUB refresh / install / reconfigure via CLI. GUI covers plan, format, helper script.",
+                homepageUrl, docsUrl).to!dstring;
         window.showMessageBox("About"d, body);
         return true;
     }

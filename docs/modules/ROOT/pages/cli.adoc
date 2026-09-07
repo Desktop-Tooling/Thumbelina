@@ -11,16 +11,39 @@ dub build --config=application
 
 Binary: `bin/tmb` (or `bin/tmb.exe`).
 
-Useful commands:
+== Plan and format
 
 [source,bash]
 ----
-tmb modes
 tmb disks
-tmb plan --mode live-iso --size-gib 64
-tmb plan --mode both --disk 2 --exfat-gib 32
-tmb write-payload --mount E:\ --mode installed --instance demo
-tmb format --mode installed --disk 2   # dry-run unless --yes (execute still stubbed)
-tmb about
-tmb debug-dump
+tmb plan --mode both --size-gib 128 --exfat-gib 32
+tmb format --mode live-iso --disk 2 --yes          # Windows or Linux
+tmb format --mode installed --disk 2 --yes         # Linux (full)
+tmb helper-script --mode both --disk 2 --out ./helper   # Windows → run on Linux/VM
+----
+
+== Boot menu and service kit
+
+[source,bash]
+----
+tmb write-payload --mount /mnt/exfat --mode both --instance desk1
+tmb refresh-boot --esp /mnt/esp --exfat /mnt/exfat --btrfs /mnt/pool --mode both --uuid <BTRFS-UUID>
+----
+
+== Installs (Linux)
+
+[source,bash]
+----
+tmb install --btrfs /mnt/pool --name arch --family arch --source /path/to/arch-bootstrap.tar.gz --refresh-grub --esp /mnt/esp --uuid <UUID>
+tmb snapshot --btrfs /mnt/pool --name arch
+tmb remove-os --btrfs /mnt/pool --name arch --refresh-grub --esp /mnt/esp
+----
+
+== Reconfigure
+
+[source,bash]
+----
+tmb reconfigure --strategy refresh-metadata --mode both --esp /mnt/esp --exfat /mnt/exfat --btrfs /mnt/pool
+tmb reconfigure --strategy change-mode --current-mode live-iso --mode installed --disk 2 --yes
+tmb reconfigure --strategy replace-volume --volume-role exfat --disk /dev/sdb2 --yes --exfat /mnt/exfat --esp /mnt/esp
 ----

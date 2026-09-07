@@ -12,7 +12,7 @@ enum FormatScope
 {
     /// Wipe whole disk GPT and create mode layout.
     wholeDisk,
-    /// Future: reclaim/replace a single volume — planned API only.
+    /// Reclaim/replace a single volume — see reconfigure.replaceVolume.
     replaceVolume
 }
 
@@ -31,7 +31,13 @@ struct FormatPlan
     LayoutPlan layout;
     string[] warnings;
     string[] steps;
-    bool executable; /// false until confirmDestructive and safety checks pass
+    bool executable;
+}
+
+struct FormatResult
+{
+    bool success;
+    string message;
 }
 
 FormatPlan buildFormatPlan(FormatRequest req)
@@ -45,7 +51,7 @@ FormatPlan buildFormatPlan(FormatRequest req)
     if (req.disk.sizeBytes >= 512UL * 1024 * 1024 * 1024)
         plan.warnings ~= "Disk is ≥512 GiB; confirm you are not targeting an internal drive.";
     if (req.scope_ == FormatScope.replaceVolume)
-        plan.warnings ~= "Replace-volume is not implemented yet; use whole-disk format.";
+        plan.warnings ~= "For single-volume replace use `tmb reconfigure --strategy replace-volume`.";
 
     plan.steps ~= "Verify device path: " ~ req.disk.devicePath;
     plan.steps ~= "Create GPT partition table";
@@ -54,16 +60,26 @@ FormatPlan buildFormatPlan(FormatRequest req)
         auto size = p.sizeBytes == 0 ? "remainder" : formatBytes(p.sizeBytes);
         plan.steps ~= "Create " ~ p.filesystem ~ " partition (" ~ p.role ~ ", " ~ size ~ ") label=" ~ p.label;
     }
-    plan.steps ~= "Install GRUB EFI to ESP";
+    plan.steps ~= "Install GRUB EFI to ESP (or stage grub.cfg if grub-install missing)";
     plan.steps ~= "Write service payload to exFAT volume ("
         ~ listServicePayloadFiles().length.to!string() ~ " entries)";
     if (plan.layout.hasBtrfsPool)
     {
         plan.steps ~= "Create Btrfs filesystem with zstd compression defaults";
-        plan.steps ~= "Create baseline subvolumes (@shared_home optional)";
+        plan.steps ~= "Create baseline subvolumes (@shared_home)";
     }
     if (plan.layout.hasIsoDropZone)
         plan.steps ~= "Ensure isos/ folder on exFAT for drag-and-drop";
+
+    version (Windows)
+    {
+        if (plan.layout.hasBtrfsPool)
+            plan.warnings ~= "Windows cannot mkfs.btrfs natively — use Linux or `tmb helper-script` + VM/live USB.";
+        else
+            plan.steps ~= "Windows path: PowerShell Clear-Disk + FAT32/exFAT";
+    }
+    version (linux)
+        plan.steps ~= "Linux path: wipefs/sgdisk/mkfs + mount + grub-install";
 
     plan.executable = req.confirmDestructive
         && req.scope_ == FormatScope.wholeDisk
@@ -95,24 +111,4 @@ string describeFormatPlan(const FormatPlan plan)
             ? "\nStatus: READY (destructive confirm set)\n"
             : "\nStatus: DRY-RUN only (not executable yet)\n");
     return app.data;
-}
-
-/// Execute is intentionally stubbed: real wipe needs platform partition APIs + Linux helper VM on Windows.
-struct FormatResult
-{
-    bool success;
-    string message;
-}
-
-FormatResult executeFormat(const FormatPlan plan)
-{
-    if (!plan.executable)
-    {
-        return FormatResult(false,
-                "Refusing to execute: confirmation missing or plan not whole-disk.");
-    }
-    return FormatResult(false,
-            "Format execute is not implemented yet on this host. "
-                ~ "Plan is ready; Linux path will use wipefs/sgdisk/mkfs; "
-                ~ "Windows/macOS will attach the disk in a helper VM.");
 }

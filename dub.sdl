@@ -10,7 +10,7 @@ targetPath "bin"
 targetName "thumbdrive-multiboot"
 sourcePaths "source/lib"
 importPaths "source/lib"
-stringImportPaths "service-payload"
+stringImportPaths "service-payload" "scripts"
 
 configuration "library" {
 }

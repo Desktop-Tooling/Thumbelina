@@ -69,10 +69,12 @@ tmb write-payload --mount /mnt/tmb --mode live-iso --instance demo
 ## Roadmap
 
 * [x] Mode planner + service payload + CLI/GUI scaffold
-* [ ] Destructive format execute (Linux native; Win/mac helper VM)
-* [ ] GRUB install + ISO menu generation (loopback)
-* [ ] Distro bootstrap into Btrfs subvolumes
-* [ ] Reconfigure / replace-volume flows
+* [x] Destructive format execute (Linux full; Windows live-iso; helper script for Btrfs)
+* [x] GRUB install/stage + ISO loopback menu generation
+* [x] Distro bootstrap into Btrfs subvolumes (Linux tools / rootfs tar)
+* [x] Reconfigure / replace-volume flows
+* [ ] Bundled GRUB `BOOTX64.EFI` in releases (when `grub-install` absent)
+* [ ] Headless helper VM auto-attach on Windows/macOS
 * [ ] Signed installers + auto-update (Software Product Essentials)
 
 ## Changelog
