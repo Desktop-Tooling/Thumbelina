@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Thumbdrive Multiboot — Linux format helper (also usable from a helper VM).
+# Thumbelina — Linux format helper (also usable from a helper VM).
 # Reads format-plan.json in the same directory, or accepts flags.
 set -euo pipefail
 
@@ -8,7 +8,7 @@ PLAN="${DIR}/format-plan.json"
 
 DEVICE=""
 MODE="live-iso"
-LABEL="Thumbdrive Multiboot"
+LABEL="Thumbelina"
 EXFAT_BYTES=0
 ESP_BYTES=$((512 * 1024 * 1024))
 INSTANCE_ID="helper"
@@ -68,17 +68,17 @@ part_suffix() {
   fi
 }
 
-sgdisk -n "1:0:+${ESP_MIB}M" -t 1:EF00 -c 1:TMB-EFI "$DEVICE"
+sgdisk -n "1:0:+${ESP_MIB}M" -t 1:EF00 -c 1:THUMBELINA-EFI "$DEVICE"
 if [[ "$MODE" == "live-iso" ]]; then
   sgdisk -n 2:0:0 -t 2:0700 -c 2:"$LABEL" "$DEVICE"
 elif [[ "$MODE" == "installed" ]]; then
   sgdisk -n 2:0:+256M -t 2:0700 -c 2:"$LABEL" "$DEVICE"
-  sgdisk -n 3:0:0 -t 3:8300 -c 3:TMB-POOL "$DEVICE"
+  sgdisk -n 3:0:0 -t 3:8300 -c 3:THUMBELINA-POOL "$DEVICE"
 else
   EXFAT_MIB=$((EXFAT_BYTES / 1024 / 1024))
   [[ "$EXFAT_MIB" -lt 1024 ]] && EXFAT_MIB=32768
   sgdisk -n "2:0:+${EXFAT_MIB}M" -t 2:0700 -c 2:"$LABEL" "$DEVICE"
-  sgdisk -n 3:0:0 -t 3:8300 -c 3:TMB-POOL "$DEVICE"
+  sgdisk -n 3:0:0 -t 3:8300 -c 3:THUMBELINA-POOL "$DEVICE"
 fi
 
 partprobe "$DEVICE"
@@ -88,12 +88,12 @@ EXFAT=$(part_suffix "$DEVICE" 2)
 BTRFS=""
 [[ "$HAS_BTRFS" -eq 1 ]] && BTRFS=$(part_suffix "$DEVICE" 3)
 
-mkfs.vfat -F 32 -n TMB-EFI "$ESP"
+mkfs.vfat -F 32 -n THUMBELINA-EFI "$ESP"
 # truncate label to 11 chars for exFAT
 LABELY=${LABEL:0:11}
 mkfs.exfat -n "$LABELY" "$EXFAT"
 if [[ -n "$BTRFS" ]]; then
-  mkfs.btrfs -f -L TMB-POOL "$BTRFS"
+  mkfs.btrfs -f -L THUMBELINA-POOL "$BTRFS"
 fi
 
 WORKDIR=$(mktemp -d)
@@ -111,7 +111,7 @@ mount "$ESP" "$WORKDIR/esp"
 mount "$EXFAT" "$WORKDIR/exfat"
 mkdir -p "$WORKDIR/exfat/isos" "$WORKDIR/exfat/docs" "$WORKDIR/exfat/tools"
 cat > "$WORKDIR/exfat/README.txt" <<EOF
-Thumbdrive Multiboot
+Thumbelina
 Mode: $MODE
 Instance: $INSTANCE_ID
 Prepared by linux-format.sh helper.
@@ -139,8 +139,8 @@ CFG="$WORKDIR/esp/boot/grub/grub.cfg"
   echo "insmod iso9660"
   echo "insmod loopback"
   echo "insmod btrfs"
-  echo "menuentry \"Thumbdrive Multiboot — scan ISOs from file system\" {"
-  echo "  echo Drop ISOs into isos/ then regenerate menu with tmb refresh-boot"
+  echo "menuentry \"Thumbelina — scan ISOs from file system\" {"
+  echo "  echo Drop ISOs into isos/ then regenerate menu with thumbelina refresh-boot"
   echo "  sleep 3"
   echo "}"
 } > "$CFG"

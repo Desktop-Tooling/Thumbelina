@@ -1,4 +1,4 @@
-module thumbdrive_multiboot.install_engine;
+module thumbelina.install_engine;
 
 import std.array : appender;
 import std.file : exists, mkdirRecurse, write;
@@ -6,8 +6,8 @@ import std.format : format;
 import std.path : baseName, buildPath, extension;
 import std.string : startsWith, toLower;
 
-import thumbdrive_multiboot.grub;
-import thumbdrive_multiboot.procutil;
+import thumbelina.grub;
+import thumbelina.procutil;
 
 /// Supported bootstrap families.
 enum DistroFamily
@@ -108,7 +108,7 @@ InstallResult installDistro(InstallRequest req)
 
             // fstab stub
             mkdirRecurse(buildPath(dest, "etc"));
-            write(buildPath(dest, "etc", "fstab.tmb-example"),
+            write(buildPath(dest, "etc", "fstab.thumbelina-example"),
                     format("# UUID=%s / btrfs subvol=%s,compress=zstd:2 0 1\n",
                             req.btrfsUuid.length ? req.btrfsUuid : "POOL-UUID", sub));
 

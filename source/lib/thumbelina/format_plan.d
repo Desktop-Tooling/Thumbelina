@@ -1,11 +1,11 @@
-module thumbdrive_multiboot.format_plan;
+module thumbelina.format_plan;
 
 import std.conv : to;
 
-import thumbdrive_multiboot.disk;
-import thumbdrive_multiboot.layout;
-import thumbdrive_multiboot.mode;
-import thumbdrive_multiboot.service_payload;
+import thumbelina.disk;
+import thumbelina.layout;
+import thumbelina.mode;
+import thumbelina.service_payload;
 
 /// Destructive action the user must confirm before execute.
 enum FormatScope
@@ -51,7 +51,7 @@ FormatPlan buildFormatPlan(FormatRequest req)
     if (req.disk.sizeBytes >= 512UL * 1024 * 1024 * 1024)
         plan.warnings ~= "Disk is ≥512 GiB; confirm you are not targeting an internal drive.";
     if (req.scope_ == FormatScope.replaceVolume)
-        plan.warnings ~= "For single-volume replace use `tmb reconfigure --strategy replace-volume`.";
+        plan.warnings ~= "For single-volume replace use `thumbelina reconfigure --strategy replace-volume`.";
 
     plan.steps ~= "Verify device path: " ~ req.disk.devicePath;
     plan.steps ~= "Create GPT partition table";
@@ -74,7 +74,7 @@ FormatPlan buildFormatPlan(FormatRequest req)
     version (Windows)
     {
         if (plan.layout.hasBtrfsPool)
-            plan.warnings ~= "Windows cannot mkfs.btrfs natively — use Linux or `tmb helper-script` + VM/live USB.";
+            plan.warnings ~= "Windows cannot mkfs.btrfs natively — use Linux or `thumbelina helper-script` + VM/live USB.";
         else
             plan.steps ~= "Windows path: PowerShell Clear-Disk + FAT32/exFAT";
     }

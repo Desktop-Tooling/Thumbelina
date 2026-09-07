@@ -1,4 +1,4 @@
-module thumbdrive_multiboot.procutil;
+module thumbelina.procutil;
 
 import std.array : join;
 import std.process : Config, execute, executeShell;

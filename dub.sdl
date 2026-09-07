@@ -1,13 +1,13 @@
-name "thumbdrive-multiboot"
-description "Format and manage multiboot USB sticks: live ISOs, thin Btrfs-installed distros, or both."
+name "thumbelina"
+description "Thumbelina — multiboot USB orchestrator: live ISOs, thin Btrfs installs, or both."
 authors "AMDphreak"
 license "MIT"
 copyright "Copyright © 2026, Desktop-Tooling"
-homepage "https://github.com/Desktop-Tooling/Thumbdrive-Multiboot"
+homepage "https://github.com/Desktop-Tooling/Thumbelina"
 
 targetType "library"
 targetPath "bin"
-targetName "thumbdrive-multiboot"
+targetName "thumbelina"
 sourcePaths "source/lib"
 importPaths "source/lib"
 stringImportPaths "service-payload" "scripts"
@@ -17,24 +17,32 @@ configuration "library" {
 
 configuration "application" {
     targetType "executable"
-    targetName "tmb"
+    targetName "thumbelina"
     mainSourceFile "source/cli/app.d"
     sourceFiles "source/cli/app.d"
-    versions "TmbCli"
+    versions "ThumbelinaCli"
+}
+
+configuration "tina" {
+    targetType "executable"
+    targetName "tina"
+    mainSourceFile "source/cli/app.d"
+    sourceFiles "source/cli/app.d"
+    versions "ThumbelinaCli"
 }
 
 configuration "gui" {
     targetType "executable"
-    targetName "thumbdrive-multiboot"
+    targetName "thumbelina-gui"
     mainSourceFile "source/gui/app.d"
     sourceFiles "source/gui/app.d"
-    versions "TmbGui"
+    versions "ThumbelinaGui"
     dependency "dlangui" version="~>0.9.186"
 }
 
 configuration "unittest" {
     targetType "executable"
-    targetName "thumbdrive-multiboot-test"
+    targetName "thumbelina-test"
     mainSourceFile "tests/runner.d"
     sourceFiles "tests/runner.d"
 }

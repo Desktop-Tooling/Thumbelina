@@ -1,11 +1,11 @@
-module thumbdrive_multiboot.reconfigure;
+module thumbelina.reconfigure;
 
 import std.array : appender;
 import std.format : format;
 
-import thumbdrive_multiboot.format_plan;
-import thumbdrive_multiboot.layout;
-import thumbdrive_multiboot.mode;
+import thumbelina.format_plan;
+import thumbelina.layout;
+import thumbelina.mode;
 
 /// How aggressively to change an existing stick.
 enum ReconfigureStrategy
@@ -40,7 +40,7 @@ struct ReconfigurePlan
     LayoutPlan targetLayout;
 }
 
-import thumbdrive_multiboot.disk;
+import thumbelina.disk;
 
 ReconfigurePlan buildReconfigurePlan(ReconfigureRequest req)
 {
@@ -128,9 +128,9 @@ struct ReconfigureResult
 ReconfigureResult executeReconfigure(const ReconfigurePlan plan,
         string espMount = null, string exfatMount = null, string btrfsMount = null)
 {
-    import thumbdrive_multiboot.grub;
-    import thumbdrive_multiboot.service_payload;
-    import thumbdrive_multiboot.format_execute : executeFormat, FormatExecuteOptions;
+    import thumbelina.grub;
+    import thumbelina.service_payload;
+    import thumbelina.format_execute : executeFormat, FormatExecuteOptions;
     import std.datetime.systime : Clock;
     import std.uuid : randomUUID;
 
@@ -184,9 +184,9 @@ ReconfigureResult executeReconfigure(const ReconfigurePlan plan,
 
 version (linux)
 {
-    import thumbdrive_multiboot.procutil;
-    import thumbdrive_multiboot.service_payload;
-    import thumbdrive_multiboot.grub;
+    import thumbelina.procutil;
+    import thumbelina.service_payload;
+    import thumbelina.grub;
     import std.datetime.systime : Clock;
     import std.uuid : randomUUID;
 
@@ -200,7 +200,7 @@ version (linux)
         if (plan.request.volumeRole == "exfat")
         {
             enforceOk(runArgv([
-                    "mkfs.exfat", "-n", "TMB", part
+                    "mkfs.exfat", "-n", "THUMBELINA", part
             ]), "mkfs.exfat replace");
             if (!exfatMount.length)
                 return ReconfigureResult(false, "Provide --exfat mount path after recreating FS");
@@ -213,7 +213,7 @@ version (linux)
         }
         else if (plan.request.volumeRole == "btrfs")
         {
-            enforceOk(runArgv(["mkfs.btrfs", "-f", "-L", "TMB-POOL", part]), "mkfs.btrfs replace");
+            enforceOk(runArgv(["mkfs.btrfs", "-f", "-L", "THUMBELINA-POOL", part]), "mkfs.btrfs replace");
             if (!btrfsMount.length)
                 return ReconfigureResult(false, "Provide --btrfs mount path after recreating FS");
             enforceOk(runArgv(["btrfs", "subvolume", "create", btrfsMount ~ "/@shared_home"]),

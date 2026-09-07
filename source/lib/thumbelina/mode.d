@@ -1,4 +1,4 @@
-module thumbdrive_multiboot.mode;
+module thumbelina.mode;
 
 /// How the stick is laid out. Reconfigurable later (may require migrate/wipe).
 enum DriveMode

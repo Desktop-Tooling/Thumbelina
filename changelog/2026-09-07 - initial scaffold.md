@@ -1,6 +1,6 @@
 # 2026-09-07 — Initial scaffold
 
-Thumbdrive Multiboot starts as a Desktop-Tooling app for formatting USB sticks in three modes (live ISO, installed Btrfs, or both), always with a Windows-visible branded exFAT service volume.
+Thumbelina starts as a Desktop-Tooling app for formatting USB sticks in three modes (live ISO, installed Btrfs, or both), always with a Windows-visible branded exFAT service volume.
 
 ## Added
 

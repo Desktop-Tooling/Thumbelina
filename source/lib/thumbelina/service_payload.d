@@ -1,11 +1,11 @@
-module thumbdrive_multiboot.service_payload;
+module thumbelina.service_payload;
 
 import std.file : exists, mkdirRecurse, write, readText;
 import std.path : buildPath;
 import std.string : replace;
 
-import thumbdrive_multiboot.mode;
-import thumbdrive_multiboot.versioning;
+import thumbelina.mode;
+import thumbelina.versioning;
 
 /// Files stamped onto the Windows-visible exFAT volume for every mode.
 struct ServicePayloadOptions

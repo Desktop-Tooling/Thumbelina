@@ -2,7 +2,7 @@
 :description: How distros get onto the Btrfs pool.
 :page-audience: developer
 
-There is no universal “install any Linux ISO from outside a live environment” standard. Thumbdrive Multiboot will wrap per-family tools:
+There is no universal “install any Linux ISO from outside a live environment” standard. Thumbelina will wrap per-family tools:
 
 == Preferred: rootfs / bootstrap
 

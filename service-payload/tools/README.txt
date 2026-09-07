@@ -3,12 +3,12 @@
 
 Place host binaries here so the stick can be serviced without a separate download:
 
-  thumbdrive-multiboot              (optional polyglot / APE experiment)
-  thumbdrive-multiboot-windows-x64.exe
-  thumbdrive-multiboot-windows-arm64.exe
-  thumbdrive-multiboot-linux-x64
-  thumbdrive-multiboot-linux-arm64
-  thumbdrive-multiboot-macos-*
+  Thumbelina              (optional polyglot / APE experiment)
+  Thumbelina-windows-x64.exe
+  Thumbelina-windows-arm64.exe
+  Thumbelina-linux-x64
+  Thumbelina-linux-arm64
+  Thumbelina-macos-*
 
 OS security (SmartScreen, Gatekeeper, AV) may block polyglot binaries; keep
 native builds as the reliable path.

@@ -1,6 +1,12 @@
 # Changelog
 
-All notable functional changes to Thumbdrive Multiboot are listed here.
+All notable functional changes to Thumbelina are listed here.
+
+## [0.3.0] — 2026-09-07
+
+Rebrand to **Thumbelina** with product icon and public-domain Andersen art.
+
+Details: [changelog/2026-09-07 - rebrand Thumbelina.md](changelog/2026-09-07%20-%20rebrand%20Thumbelina.md)
 
 ## [0.2.0] — 2026-09-07
 
@@ -10,6 +16,6 @@ Details: [changelog/2026-09-07 - format grub install reconfigure.md](changelog/2
 
 ## [0.1.0] — 2026-09-07
 
-Initial public scaffold: three drive modes, layout planner, service-payload templates, disk listing, CLI and GUI shells, Antora docs stub.
+Initial public scaffold under the former Thumbdrive-Multiboot name.
 
 Details: [changelog/2026-09-07 - initial scaffold.md](changelog/2026-09-07%20-%20initial%20scaffold.md)

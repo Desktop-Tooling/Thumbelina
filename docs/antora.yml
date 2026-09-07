@@ -1,6 +1,6 @@
-name: thumbdrive-multiboot
-title: Thumbdrive Multiboot
-version: 0.2.0
+name: thumbelina
+title: Thumbelina
+version: 0.3.0
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc

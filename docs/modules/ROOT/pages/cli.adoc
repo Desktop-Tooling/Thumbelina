@@ -1,5 +1,5 @@
 = CLI
-:description: tmb command reference.
+:description: thumbelina command reference.
 :page-audience: end-user
 
 Build:
@@ -9,41 +9,41 @@ Build:
 dub build --config=application
 ----
 
-Binary: `bin/tmb` (or `bin/tmb.exe`).
+Binary: `bin/thumbelina` (or `bin/thumbelina.exe`).
 
 == Plan and format
 
 [source,bash]
 ----
-tmb disks
-tmb plan --mode both --size-gib 128 --exfat-gib 32
-tmb format --mode live-iso --disk 2 --yes          # Windows or Linux
-tmb format --mode installed --disk 2 --yes         # Linux (full)
-tmb helper-script --mode both --disk 2 --out ./helper   # Windows → run on Linux/VM
+thumbelina disks
+thumbelina plan --mode both --size-gib 128 --exfat-gib 32
+thumbelina format --mode live-iso --disk 2 --yes          # Windows or Linux
+thumbelina format --mode installed --disk 2 --yes         # Linux (full)
+thumbelina helper-script --mode both --disk 2 --out ./helper   # Windows → run on Linux/VM
 ----
 
 == Boot menu and service kit
 
 [source,bash]
 ----
-tmb write-payload --mount /mnt/exfat --mode both --instance desk1
-tmb refresh-boot --esp /mnt/esp --exfat /mnt/exfat --btrfs /mnt/pool --mode both --uuid <BTRFS-UUID>
+thumbelina write-payload --mount /mnt/exfat --mode both --instance desk1
+thumbelina refresh-boot --esp /mnt/esp --exfat /mnt/exfat --btrfs /mnt/pool --mode both --uuid <BTRFS-UUID>
 ----
 
 == Installs (Linux)
 
 [source,bash]
 ----
-tmb install --btrfs /mnt/pool --name arch --family arch --source /path/to/arch-bootstrap.tar.gz --refresh-grub --esp /mnt/esp --uuid <UUID>
-tmb snapshot --btrfs /mnt/pool --name arch
-tmb remove-os --btrfs /mnt/pool --name arch --refresh-grub --esp /mnt/esp
+thumbelina install --btrfs /mnt/pool --name arch --family arch --source /path/to/arch-bootstrap.tar.gz --refresh-grub --esp /mnt/esp --uuid <UUID>
+thumbelina snapshot --btrfs /mnt/pool --name arch
+thumbelina remove-os --btrfs /mnt/pool --name arch --refresh-grub --esp /mnt/esp
 ----
 
 == Reconfigure
 
 [source,bash]
 ----
-tmb reconfigure --strategy refresh-metadata --mode both --esp /mnt/esp --exfat /mnt/exfat --btrfs /mnt/pool
-tmb reconfigure --strategy change-mode --current-mode live-iso --mode installed --disk 2 --yes
-tmb reconfigure --strategy replace-volume --volume-role exfat --disk /dev/sdb2 --yes --exfat /mnt/exfat --esp /mnt/esp
+thumbelina reconfigure --strategy refresh-metadata --mode both --esp /mnt/esp --exfat /mnt/exfat --btrfs /mnt/pool
+thumbelina reconfigure --strategy change-mode --current-mode live-iso --mode installed --disk 2 --yes
+thumbelina reconfigure --strategy replace-volume --volume-role exfat --disk /dev/sdb2 --yes --exfat /mnt/exfat --esp /mnt/esp
 ----

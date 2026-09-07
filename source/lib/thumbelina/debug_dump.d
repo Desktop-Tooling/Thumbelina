@@ -1,4 +1,4 @@
-module thumbdrive_multiboot.debug_dump;
+module thumbelina.debug_dump;
 
 import std.array : appender;
 import std.datetime.systime : Clock;
@@ -6,7 +6,7 @@ import std.file : tempDir, mkdirRecurse, write;
 import std.path : buildPath;
 import std.process : environment;
 
-import thumbdrive_multiboot.versioning;
+import thumbelina.versioning;
 
 /// Redacted support dump (paths + versions; no secrets).
 struct DebugDump
@@ -19,7 +19,7 @@ DebugDump writeDebugDump(string destDir = null)
 {
     import std.uuid : randomUUID;
 
-    auto dir = destDir.length ? destDir : buildPath(tempDir, "tmb-debug-" ~ randomUUID().toString());
+    auto dir = destDir.length ? destDir : buildPath(tempDir, "thumbelina-debug-" ~ randomUUID().toString());
     mkdirRecurse(dir);
 
     auto app = appender!string();

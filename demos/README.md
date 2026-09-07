@@ -1,4 +1,4 @@
-# Thumbdrive Multiboot — mode desk
+# Thumbelina — mode desk
 
 Lay-person explainer for the three USB layouts. Interactive GUI lives in the desktop app; this page is the catalog entry for the org demos browser.
 
@@ -10,5 +10,5 @@ Lay-person explainer for the three USB layouts. Interactive GUI lives in the des
 
 Prefer two specialized sticks when capacity is tight.
 
-Repository: https://github.com/Desktop-Tooling/Thumbdrive-Multiboot  
-Docs: https://desktop-tooling.github.io/docs/thumbdrive-multiboot/
+Repository: https://github.com/Desktop-Tooling/Thumbelina  
+Docs: https://desktop-tooling.github.io/docs/Thumbelina/

@@ -1,39 +1,43 @@
 <div align="center">
 
-<a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/graphs/contributors"><img src="https://img.shields.io/github/contributors/Desktop-Tooling/Thumbdrive-Multiboot.svg?style=for-the-badge" alt="Contributors"></a>
-<a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/network/members"><img src="https://img.shields.io/github/forks/Desktop-Tooling/Thumbdrive-Multiboot.svg?style=for-the-badge" alt="Forks"></a>
-<a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/stargazers"><img src="https://img.shields.io/github/stars/Desktop-Tooling/Thumbdrive-Multiboot.svg?style=for-the-badge" alt="Stargazers"></a>
-<a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/issues"><img src="https://img.shields.io/github/issues/Desktop-Tooling/Thumbdrive-Multiboot.svg?style=for-the-badge" alt="Issues"></a>
-<a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Desktop-Tooling/Thumbdrive-Multiboot.svg?style=for-the-badge" alt="MIT License"></a>
+<a href="https://github.com/Desktop-Tooling/Thumbelina/graphs/contributors"><img src="https://img.shields.io/github/contributors/Desktop-Tooling/Thumbelina.svg?style=for-the-badge" alt="Contributors"></a>
+<a href="https://github.com/Desktop-Tooling/Thumbelina/network/members"><img src="https://img.shields.io/github/forks/Desktop-Tooling/Thumbelina.svg?style=for-the-badge" alt="Forks"></a>
+<a href="https://github.com/Desktop-Tooling/Thumbelina/stargazers"><img src="https://img.shields.io/github/stars/Desktop-Tooling/Thumbelina.svg?style=for-the-badge" alt="Stargazers"></a>
+<a href="https://github.com/Desktop-Tooling/Thumbelina/issues"><img src="https://img.shields.io/github/issues/Desktop-Tooling/Thumbelina.svg?style=for-the-badge" alt="Issues"></a>
+<a href="https://github.com/Desktop-Tooling/Thumbelina/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Desktop-Tooling/Thumbelina.svg?style=for-the-badge" alt="MIT License"></a>
 
-<h3 align="center">Thumbdrive Multiboot</h3>
+<br />
+<img src="assets/icons/thumbelina-256.png" alt="Thumbelina icon" width="160" height="160" />
+
+<h3 align="center">Thumbelina</h3>
 
 <p align="center">
-  Format USB sticks for live ISOs, thin Btrfs-installed Linux systems, or both — with a Windows-visible branded volume every time.
+  Multiboot USB orchestrator — live ISOs, thin Btrfs installs, or both.<br />
+  Small stick, chosen purpose: not whatever the installer assumed.
   <br />
-  <a href="https://desktop-tooling.github.io/docs/thumbdrive-multiboot/"><strong>Explore the docs »</strong></a>
-  <br />
-  <br />
-  <a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/issues">Report Bug</a>
+  <a href="https://desktop-tooling.github.io/docs/thumbelina/"><strong>Explore the docs »</strong></a>
   &middot;
-  <a href="https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/issues">Request Feature</a>
+  <a href="https://desktop-tooling.github.io/demos/thumbelina/">Demos</a>
+  <br />
+  <br />
+  <a href="https://github.com/Desktop-Tooling/Thumbelina/issues">Report Bug</a>
+  &middot;
+  <a href="https://github.com/Desktop-Tooling/Thumbelina/issues">Request Feature</a>
 </p>
 
 </div>
 
 ## About
 
-Thumbdrive Multiboot is a D library, CLI (`tmb`), and desktop GUI for preparing multiboot flash drives.
+Thumbelina formats and manages USB sticks so **size stops defining the job**. Pick a live-ISO toolkit, a thin Btrfs install pool, or both — and keep a Windows-visible branded volume so the drive is never a mystery.
+
+Named for Andersen’s Thumbelina: resisting everyone who tries to decide what a small thing is *for*.
 
 | Mode | What you get |
 | --- | --- |
-| **Live ISOs** | ESP + large exFAT — drag `.iso` files into `isos/` like Ventoy |
+| **Live ISOs** | ESP + large exFAT — drag `.iso` files into `isos/` |
 | **Installed OSes** | ESP + small service exFAT + Btrfs pool (thin subvolumes, zstd, snapshots) |
 | **Both** | Sized exFAT for ISOs + remaining Btrfs for installs |
-
-Every mode stamps a **service kit** on the Windows-visible volume: README, version/instance metadata, docs, links, and room for host tools (native builds + optional polyglot binary).
-
-Small drives: prefer two sticks (toolkit vs installed). Hybrid is optional when capacity allows.
 
 ### Built With
 
@@ -47,35 +51,44 @@ Small drives: prefer two sticks (toolkit vs installed). Hybrid is optional when 
 ### Prerequisites
 
 * [DUB](https://dub.pm/) + LDC or DMD
-* Windows, Linux, or macOS host (destructive format execute lands first on Linux; Win/mac use a helper VM later)
+* Linux for full Btrfs format/install; Windows can format **live-iso** natively and emit a Linux helper script for the rest
 
 ### Build
 
 ```bash
-dub build --config=application   # CLI → bin/tmb
-dub build --config=gui           # GUI → bin/thumbdrive-multiboot
-dub build --config=unittest      # tests
+dub build --config=application   # CLI → bin/thumbelina
+dub build --config=tina          # short alias → bin/tina
+dub build --config=gui           # GUI → bin/thumbelina-gui
+dub build --config=unittest
 ```
 
 ### CLI examples
 
 ```bash
-tmb modes
-tmb plan --mode installed --size-gib 64
-tmb plan --mode both --size-gib 128 --exfat-gib 32
-tmb write-payload --mount /mnt/tmb --mode live-iso --instance demo
+thumbelina modes
+thumbelina plan --mode installed --size-gib 64
+thumbelina helper-script --mode both --disk 2 --out ./helper
 ```
 
-## Roadmap
+## Brand & art
 
-* [x] Mode planner + service payload + CLI/GUI scaffold
-* [x] Destructive format execute (Linux full; Windows live-iso; helper script for Btrfs)
-* [x] GRUB install/stage + ISO loopback menu generation
-* [x] Distro bootstrap into Btrfs subvolumes (Linux tools / rootfs tar)
-* [x] Reconfigure / replace-volume flows
-* [ ] Bundled GRUB `BOOTX64.EFI` in releases (when `grub-install` absent)
-* [ ] Headless helper VM auto-attach on Windows/macOS
-* [ ] Signed installers + auto-update (Software Product Essentials)
+<p align="center">
+  <img src="assets/brand/thumbelina-icon.png" alt="Thumbelina product icon" width="280" />
+</p>
+
+Product icon: original art (petal boat with USB tip). Raster master plus sizes under [`assets/icons/`](assets/icons/); a simplified SVG mark is [`assets/icons/thumbelina-mark.svg`](assets/icons/thumbelina-mark.svg) for places that need vectors.
+
+### Public-domain companions (README decoration)
+
+Historical Andersen illustrations (US public domain). Attribution: [`assets/public-domain/ATTRIBUTION.txt`](assets/public-domain/ATTRIBUTION.txt).
+
+<p align="center">
+  <img src="assets/public-domain/readme-boyle-swallow-720.jpg" alt="Eleanor Vere Boyle, 1872 — Thumbelina on the swallow" width="360" />
+  &nbsp;
+  <img src="assets/public-domain/readme-pedersen-480.jpg" alt="Vilhelm Pedersen — Thumbelina" width="220" />
+  &nbsp;
+  <img src="assets/public-domain/readme-bertall-480.png" alt="Bertall — La Petite Poucette" width="220" />
+</p>
 
 ## Changelog
 
@@ -88,4 +101,4 @@ Distributed under the MIT License. See [LICENSE](LICENSE).
 ## Contact
 
 * Org: [Desktop-Tooling](https://github.com/Desktop-Tooling)
-* Issues: [Thumbdrive-Multiboot issues](https://github.com/Desktop-Tooling/Thumbdrive-Multiboot/issues)
+* Issues: [Thumbelina issues](https://github.com/Desktop-Tooling/Thumbelina/issues)

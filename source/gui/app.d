@@ -7,7 +7,7 @@ import std.file : mkdirRecurse, tempDir;
 import std.path : buildPath;
 import std.uuid : randomUUID;
 
-import thumbdrive_multiboot;
+import thumbelina;
 
 mixin APP_ENTRY_POINT;
 

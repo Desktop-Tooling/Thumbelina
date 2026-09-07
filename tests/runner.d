@@ -5,7 +5,7 @@ import std.file : mkdirRecurse, readText, rmdirRecurse, tempDir, write;
 import std.path : buildPath;
 import std.uuid : randomUUID;
 
-import thumbdrive_multiboot;
+import thumbelina;
 
 void main()
 {
@@ -116,5 +116,5 @@ void main()
         rmdirRecurse(dir);
     }
 
-    assert(sanitizeLabel("Thumbdrive Multiboot").length <= 11);
+    assert(sanitizeLabel("Thumbelina").length <= 11);
 }

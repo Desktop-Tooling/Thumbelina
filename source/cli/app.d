@@ -8,7 +8,7 @@ import std.path : buildPath;
 import std.stdio : writeln, writefln, stderr;
 import std.uuid : randomUUID;
 
-import thumbdrive_multiboot;
+import thumbelina;
 
 int main(string[] args)
 {
@@ -77,7 +77,7 @@ void printHelp()
 {
     writeln(versionLine());
     writeln();
-    writeln("Usage: tmb <command> [options]");
+    writeln("Usage: thumbelina <command> [options]");
     writeln();
     writeln("Commands:");
     writeln("  modes              List drive modes");
@@ -180,7 +180,7 @@ int cmdFormat(string[] args)
 
 int cmdHelperScript(string[] args)
 {
-    string outDir = buildPath(tempDir, "tmb-helper");
+    string outDir = buildPath(tempDir, "thumbelina-helper");
     auto req = parseFormatRequest(args, true);
     // helper does not need --yes to write scripts
     req.confirmDestructive = true;

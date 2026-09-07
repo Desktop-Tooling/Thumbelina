@@ -1,4 +1,4 @@
-module thumbdrive_multiboot.format_execute;
+module thumbelina.format_execute;
 
 import std.array : appender, split;
 import std.conv : to;
@@ -9,12 +9,12 @@ import std.path : buildPath;
 import std.string : strip, replace, splitLines;
 import std.uuid : randomUUID;
 
-import thumbdrive_multiboot.format_plan;
-import thumbdrive_multiboot.grub;
-import thumbdrive_multiboot.layout;
-import thumbdrive_multiboot.mode;
-import thumbdrive_multiboot.procutil;
-import thumbdrive_multiboot.service_payload;
+import thumbelina.format_plan;
+import thumbelina.grub;
+import thumbelina.layout;
+import thumbelina.mode;
+import thumbelina.procutil;
+import thumbelina.service_payload;
 
 struct FormatExecuteOptions
 {
@@ -67,7 +67,7 @@ string sanitizeLabel(string label)
     if (buf.length > 11)
         buf = buf[0 .. 11];
     if (!buf.length)
-        return "TMB";
+        return "THUMBELINA";
     return buf.idup;
 }
 
@@ -158,14 +158,14 @@ version (linux)
         enforceOk(runArgv(["partprobe", disk]), "partprobe");
         runArgv(["udevadm", "settle"]);
 
-        enforceOk(runArgv(["mkfs.vfat", "-F", "32", "-n", "TMB-EFI", espPart]), "mkfs.vfat");
+        enforceOk(runArgv(["mkfs.vfat", "-F", "32", "-n", "THUMBELINA-EFI", espPart]), "mkfs.vfat");
         enforceOk(runArgv([
                 "mkfs.exfat", "-n", sanitizeLabel(plan.layout.volumeLabel), exfatPart
         ]), "mkfs.exfat");
         if (btrfsPart.length)
-            enforceOk(runArgv(["mkfs.btrfs", "-f", "-L", "TMB-POOL", btrfsPart]), "mkfs.btrfs");
+            enforceOk(runArgv(["mkfs.btrfs", "-f", "-L", "THUMBELINA-POOL", btrfsPart]), "mkfs.btrfs");
 
-        auto work = buildPath(tempDir, "tmb-format-" ~ randomUUID().toString());
+        auto work = buildPath(tempDir, "thumbelina-format-" ~ randomUUID().toString());
         mkdirRecurse(work);
         scope (exit)
         {
@@ -246,7 +246,7 @@ version (Windows)
         {
             throw new Exception(
                     "Windows cannot create Btrfs pools natively. "
-                        ~ "Run `tmb helper-script --disk <id> --mode " ~ modeId(plan.request.mode)
+                        ~ "Run `thumbelina helper-script --disk <id> --mode " ~ modeId(plan.request.mode)
                         ~ "` and execute linux-format.sh from a Linux live environment or VM "
                         ~ "with this USB attached. Or format on a Linux host. "
                         ~ "Live-ISO mode (`--mode live-iso`) formats fully on Windows.");
@@ -254,7 +254,7 @@ version (Windows)
 
         auto diskNum = plan.request.disk.id;
         if (!diskNum.length)
-            throw new Exception("Windows format requires numeric disk id from `tmb disks`");
+            throw new Exception("Windows format requires numeric disk id from `thumbelina disks`");
 
         auto espMiB = plan.layout.partitions[0].sizeBytes / (1024 * 1024);
         if (espMiB == 0)
@@ -266,7 +266,7 @@ $ErrorActionPreference = 'Stop'
 Clear-Disk -Number %s -RemoveData -Confirm:$false
 Initialize-Disk -Number %s -PartitionStyle GPT
 $esp = New-Partition -DiskNumber %s -Size %sMB -GptType '{c12a7328-f81f-11d2-ba4b-00a0c93ec93b}'
-Format-Volume -Partition $esp -FileSystem FAT32 -NewFileSystemLabel 'TMB-EFI' -Confirm:$false | Out-Null
+Format-Volume -Partition $esp -FileSystem FAT32 -NewFileSystemLabel 'THUMBELINA-EFI' -Confirm:$false | Out-Null
 $ex = New-Partition -DiskNumber %s -UseMaximumSize -AssignDriveLetter
 Format-Volume -Partition $ex -FileSystem exFAT -NewFileSystemLabel '%s' -Confirm:$false | Out-Null
 Get-Partition -DiskNumber %s -PartitionNumber $esp.PartitionNumber | Add-PartitionAccessPath -AssignDriveLetter

@@ -1,4 +1,4 @@
-module thumbdrive_multiboot.grub;
+module thumbelina.grub;
 
 import std.algorithm : endsWith, filter, map, sort;
 import std.array : array, appender;
@@ -7,9 +7,9 @@ import std.format : format;
 import std.path : baseName, buildPath, extension, stripExtension;
 import std.string : replace, toLower, strip;
 
-import thumbdrive_multiboot.mode;
-import thumbdrive_multiboot.procutil;
-import thumbdrive_multiboot.versioning;
+import thumbelina.mode;
+import thumbelina.procutil;
+import thumbelina.versioning;
 
 struct InstalledOsEntry
 {
@@ -212,7 +212,7 @@ void writeGrubCfgToEsp(string espMount, string cfg)
 {
     auto paths = [
         buildPath(espMount, "boot", "grub", "grub.cfg"),
-        buildPath(espMount, "EFI", "thumbdrive-multiboot", "grub.cfg"),
+        buildPath(espMount, "EFI", "thumbelina", "grub.cfg"),
         buildPath(espMount, "EFI", "BOOT", "grub.cfg"),
     ];
     foreach (p; paths)
@@ -236,9 +236,9 @@ GrubInstallResult installGrubEfi(string espMount, string diskDevice = null)
         // Ensure removable path exists for a future bundled BOOTX64.EFI
         mkdirRecurse(buildPath(espMount, "EFI", "BOOT"));
         mkdirRecurse(buildPath(espMount, "boot", "grub"));
-        write(buildPath(espMount, "EFI", "BOOT", "README-TMB.txt"),
+        write(buildPath(espMount, "EFI", "BOOT", "README-THUMBELINA.txt"),
                 "Place BOOTX64.EFI here or run grub-install from a Linux host.\n"
-                    ~ "Thumbdrive Multiboot writes grub.cfg beside this file.\n");
+                    ~ "Thumbelina writes grub.cfg beside this file.\n");
         return GrubInstallResult(false,
                 "grub-install not found; wrote ESP layout and grub.cfg. "
                     ~ "Install GRUB EFI on a Linux host or ship BOOTX64.EFI into EFI/BOOT.");

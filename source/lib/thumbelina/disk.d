@@ -1,4 +1,4 @@
-module thumbdrive_multiboot.disk;
+module thumbelina.disk;
 
 import std.conv : to;
 import std.process : execute;
@@ -118,7 +118,7 @@ version (linux)
 string describeDisk(const DiskInfo d)
 {
     import std.format : format;
-    import thumbdrive_multiboot.layout : formatBytes;
+    import thumbelina.layout : formatBytes;
 
     return format("[%s] %s  %s  %s  %s",
             d.id,

@@ -1,7 +1,7 @@
-module thumbdrive_multiboot.layout;
+module thumbelina.layout;
 
-import thumbdrive_multiboot.mode;
-import thumbdrive_multiboot.versioning : appName;
+import thumbelina.mode;
+import thumbelina.versioning : appName;
 
 /// Default ESP size (FAT32) for GRUB EFI.
 enum ulong defaultEspBytes = 512UL * 1024 * 1024;
@@ -49,7 +49,7 @@ LayoutPlan planLayout(DriveMode mode, ulong diskSizeBytes, LayoutOptions opts = 
 {
     if (diskSizeBytes < minimumDiskBytes)
     {
-        throw new Exception("Disk too small for Thumbdrive Multiboot (need at least ~2 GiB)");
+        throw new Exception("Disk too small for Thumbelina (need at least ~2 GiB)");
     }
 
     LayoutPlan plan;
@@ -60,7 +60,7 @@ LayoutPlan planLayout(DriveMode mode, ulong diskSizeBytes, LayoutOptions opts = 
     PartitionSpec esp;
     esp.role = "esp";
     esp.filesystem = "fat32";
-    esp.label = "TMB-EFI";
+    esp.label = "THUMBELINA-EFI";
     esp.sizeBytes = opts.espBytes ? opts.espBytes : defaultEspBytes;
     esp.purpose = "UEFI System Partition (GRUB)";
 
@@ -92,7 +92,7 @@ LayoutPlan planLayout(DriveMode mode, ulong diskSizeBytes, LayoutOptions opts = 
         PartitionSpec pool;
         pool.role = "btrfs";
         pool.filesystem = "btrfs";
-        pool.label = "TMB-POOL";
+        pool.label = "THUMBELINA-POOL";
         pool.sizeBytes = 0;
         pool.purpose = "Thin install pool (subvolumes, zstd compression)";
         plan.partitions = [esp, service, pool];
@@ -117,7 +117,7 @@ LayoutPlan planLayout(DriveMode mode, ulong diskSizeBytes, LayoutOptions opts = 
         PartitionSpec poolBoth;
         poolBoth.role = "btrfs";
         poolBoth.filesystem = "btrfs";
-        poolBoth.label = "TMB-POOL";
+        poolBoth.label = "THUMBELINA-POOL";
         poolBoth.sizeBytes = 0;
         poolBoth.purpose = "Thin install pool (subvolumes, zstd compression)";
         plan.partitions = [esp, dropBoth, poolBoth];
@@ -148,7 +148,7 @@ string describePlan(const LayoutPlan plan)
 {
     import std.array : appender;
     import std.format : format;
-    import thumbdrive_multiboot.mode : modeTitle;
+    import thumbelina.mode : modeTitle;
 
     auto app = appender!string();
     app.put(format("%s — %s\n", modeTitle(plan.mode), plan.summary));

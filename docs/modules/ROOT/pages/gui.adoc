@@ -1,5 +1,5 @@
 = GUI
-:description: Desktop UI for Thumbdrive Multiboot.
+:description: Desktop UI for Thumbelina.
 :page-audience: end-user
 
 Build:

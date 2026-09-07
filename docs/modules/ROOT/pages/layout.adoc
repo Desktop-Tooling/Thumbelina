@@ -1,5 +1,5 @@
 = Disk layout
-:description: GPT partitions for Thumbdrive Multiboot.
+:description: GPT partitions for Thumbelina.
 :page-audience: end-user
 
 All layouts use GPT.
@@ -30,7 +30,7 @@ Written to the Windows-visible exFAT on every mode:
 * `tools/` host binaries (native per OS/arch; optional polyglot experiment)
 * `isos/` folder (primary on Live/Both)
 
-Volume label defaults to `Thumbdrive Multiboot`.
+Volume label defaults to `Thumbelina`.
 
 == Boot
 

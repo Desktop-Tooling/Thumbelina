@@ -24,6 +24,8 @@
 !/changelog-details/**
 !/demos/
 !/demos/**
+!/assets/
+!/assets/**
 !/.github/
 !/.github/**
 

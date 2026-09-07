@@ -1,0 +1,19 @@
+# ATTRIBUTION — public-domain Thumbelina art
+#
+# These historical illustrations are in the public domain in the United States
+# (published before 1930 / author life+70). Kept for README and docs decoration.
+#
+# - eleanor-vere-boyle-thumbelina-swallow.jpg
+#   Eleanor Vere Boyle, 1872 — "Tommelise borne on the Swallow's back…"
+#   Source: https://commons.wikimedia.org/wiki/File:Eleanor_Vere_Boyle_Thumbelina.jpg
+#
+# - vilhelm-pedersen-thumbelina.jpg / calineczka-vilhelm-pedersen.jpeg
+#   Vilhelm Pedersen (1820–1859) — original Andersen illustrator
+#   Sources: Wikipedia / Commons Calineczka_VP_ubt.jpeg
+#
+# - bertall-petite-poucette.png
+#   Bertall — La Petite Poucette
+#   Source: https://commons.wikimedia.org/wiki/File:Bertall_ill_La_Petite_Poucette1.png
+#
+# Brand icon (assets/brand/thumbelina-icon.png) is original project art (ChatGPT-assisted, 2026),
+# not public domain; all rights for Desktop-Tooling / Thumbelina product use.

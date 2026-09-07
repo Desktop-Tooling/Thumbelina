@@ -15,6 +15,6 @@ jobs:
         with:
           compiler: ldc-latest
       - name: Unit tests
-        run: dub build --config=unittest && ./bin/thumbdrive-multiboot-test
+        run: dub build --config=unittest && ./bin/Thumbelina-test
       - name: Build CLI
         run: dub build --config=application
