@@ -1,43 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Single-color glyph for favicons / status bars. Fill via CSS currentColor or set fill on the root. -->
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 200 140"
+     viewBox="0 0 128 128"
      role="img"
      aria-label="Thumbelina"
      fill="currentColor">
   <title>Thumbelina</title>
   <g id="thumbelina-glyph-mono">
-    <!-- petal boat -->
-    <path d="M28 96
-             C28 62 58 34 96 34
-             C128 34 152 48 164 68
-             C168 74 168 82 162 86
-             C140 98 108 108 78 108
-             C54 108 34 104 28 96
-             Z"/>
-    <!-- sepal -->
-    <path d="M152 70
-             C160 62 172 64 178 74
-             C182 80 180 90 172 94
-             C164 98 154 94 150 86
-             C148 80 148 74 152 70
-             Z"/>
-    <!-- USB body -->
-    <rect x="172" y="66" width="26" height="22" rx="2.5"/>
-    <!-- USB windows as cutouts via overlay (drawn as holes using evenodd on a combined path would be nicer;
-         for mono badges, inset notches read fine as darker absence when used as mask  here as inner rects with fill none stroke) -->
-    <rect x="178" y="73" width="4.5" height="4.5" rx="0.6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
-    <rect x="178" y="80" width="4.5" height="4.5" rx="0.6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
-    <!-- figure -->
-    <circle cx="100" cy="58" r="11"/>
-    <path d="M86 78
-             C84 92 82 104 90 108
-             C98 112 112 110 116 100
-             C118 92 114 80 108 76
-             C102 72 90 72 86 78
-             Z"/>
-    <!-- butterfly -->
-    <ellipse cx="43" cy="28" rx="7" ry="4.5" transform="rotate(-25 43 28)"/>
-    <ellipse cx="53" cy="28" rx="7" ry="4.5" transform="rotate(25 53 28)"/>
+    <rect x="28" y="18" width="72" height="78" rx="14"/>
+    <rect x="46" y="92" width="36" height="22" rx="3"/>
   </g>
 </svg>

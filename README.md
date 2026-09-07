@@ -78,13 +78,13 @@ thumbelina helper-script --mode both --disk 2 --out ./helper
 
 Product face: painted PNG under [`assets/brand/`](assets/brand/) (sizes in [`assets/icons/`](assets/icons/)).
 
-SVG marks (original vector, not a PNG trace):
+SVG marks (simple USB drive in Thumbelina pink/gold):
 
 | File | Use |
 | --- | --- |
-| [`thumbelina-glyph.svg`](assets/icons/thumbelina-glyph.svg) | **Isolated** petal-boat + USB (no rounded tile) |
-| [`thumbelina-mark.svg`](assets/icons/thumbelina-mark.svg) | Same glyph on a gold-rimmed app tile |
-| [`thumbelina-glyph-mono.svg`](assets/icons/thumbelina-glyph-mono.svg) | Single-color / `currentColor` badge |
+| [`thumbelina-glyph.svg`](assets/icons/thumbelina-glyph.svg) | Isolated drive (no tile) |
+| [`thumbelina-mark.svg`](assets/icons/thumbelina-mark.svg) | Drive on app tile |
+| [`thumbelina-glyph-mono.svg`](assets/icons/thumbelina-glyph-mono.svg) | Mono / `currentColor` |
 
 ### Public-domain companions (README decoration)
 

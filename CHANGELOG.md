@@ -2,6 +2,10 @@
 
 All notable functional changes to Thumbelina are listed here.
 
+## [0.3.2] — 2026-09-07
+
+Simplify SVG marks to a USB drive in Thumbelina pink/gold.
+
 ## [0.3.1] — 2026-09-07
 
 New SVG marks: isolated glyph, app-tile mark, mono badge.
