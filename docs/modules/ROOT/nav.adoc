@@ -1,4 +1,3 @@
-* xref:index.adoc[Thumbelina]
 * xref:modes.adoc[Drive modes]
 * xref:layout.adoc[Disk layout]
 * xref:install-engine.adoc[Install engine]
