@@ -1,6 +1,6 @@
 name: thumbelina
 title: Thumbelina
-version: 0.3.2
+version: 0.3.3
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc

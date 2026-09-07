@@ -78,7 +78,7 @@ thumbelina helper-script --mode both --disk 2 --out ./helper
 
 Product face: painted PNG under [`assets/brand/`](assets/brand/) (sizes in [`assets/icons/`](assets/icons/)).
 
-SVG marks (simple USB drive in Thumbelina pink/gold):
+SVG marks (horizontal rose/gold USB drive silhouette):
 
 | File | Use |
 | --- | --- |

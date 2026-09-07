@@ -1,40 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- App-tile version of the simple Thumbelina USB mark. -->
+<!--
+  Thumbelina app mark - glyph on a rounded-square tile.
+  Deep rose field with a sparing teal undertone and a thin gold rim.
+  Glyph geometry is identical to thumbelina-glyph.svg, tilted -30 degrees
+  so the drive fills the square. No SVG filters: depth is painted.
+-->
 <svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 128 128"
+     width="128" height="128"
      role="img"
      aria-label="Thumbelina">
   <title>Thumbelina</title>
   <defs>
-    <linearGradient id="tile" x1="16" y1="12" x2="112" y2="116" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#1a535c"/>
-      <stop offset="100%" stop-color="#071820"/>
+    <linearGradient id="tm-field" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#43112a"/>
+      <stop offset="0.55" stop-color="#280a1a"/>
+      <stop offset="1" stop-color="#160610"/>
     </linearGradient>
-    <linearGradient id="rim" x1="8" y1="8" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#f3e2a7"/>
-      <stop offset="100%" stop-color="#c9a227"/>
+
+    <!-- warm bloom behind the glyph -->
+    <radialGradient id="tm-bloom" cx="56" cy="50" r="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f06292" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#f06292" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- teal accent, sparingly, lower left only -->
+    <radialGradient id="tm-teal" cx="14" cy="122" r="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a535c" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#1a535c" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="tm-rim" x1="0" y1="0" x2="0" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f0d78c" stop-opacity="0.85"/>
+      <stop offset="0.45" stop-color="#d4af37" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#8a6a12" stop-opacity="0.5"/>
     </linearGradient>
-    <linearGradient id="body" x1="36" y1="28" x2="92" y2="96" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ff8fb8"/>
-      <stop offset="55%" stop-color="#e91e8c"/>
-      <stop offset="100%" stop-color="#9b1b5e"/>
+
+    <radialGradient id="tm-cast">
+      <stop offset="0" stop-color="#0d0007" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#0d0007" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="tm-shell" x1="40" y1="4" x2="72" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff9ec5"/>
+      <stop offset="0.3" stop-color="#f06292"/>
+      <stop offset="0.7" stop-color="#e0356f"/>
+      <stop offset="1" stop-color="#ad1457"/>
     </linearGradient>
-    <linearGradient id="gold" x1="48" y1="88" x2="80" y2="112" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#f3e2a7"/>
-      <stop offset="100%" stop-color="#c9a227"/>
+
+    <linearGradient id="tm-sheen" x1="0" y1="4" x2="0" y2="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="tm-base" x1="0" y1="30" x2="0" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6d0d33" stop-opacity="0"/>
+      <stop offset="1" stop-color="#6d0d33" stop-opacity="0.32"/>
+    </linearGradient>
+
+    <linearGradient id="tm-bevel" x1="0" y1="4" x2="0" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.62"/>
+      <stop offset="0.34" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.68" stop-color="#4a0b22" stop-opacity="0"/>
+      <stop offset="1" stop-color="#4a0b22" stop-opacity="0.45"/>
+    </linearGradient>
+
+    <linearGradient id="tm-plug" x1="0" y1="15" x2="0" y2="41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a3801c"/>
+      <stop offset="0.08" stop-color="#d8b545"/>
+      <stop offset="0.24" stop-color="#f4e2a6"/>
+      <stop offset="0.4" stop-color="#fdf6de"/>
+      <stop offset="0.56" stop-color="#e3c463"/>
+      <stop offset="0.74" stop-color="#f0d78c"/>
+      <stop offset="0.9" stop-color="#b8901f"/>
+      <stop offset="1" stop-color="#8a6a12"/>
+    </linearGradient>
+
+    <linearGradient id="tm-collar" x1="0" y1="13" x2="0" y2="43" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8a6a12"/>
+      <stop offset="0.16" stop-color="#c9a52f"/>
+      <stop offset="0.36" stop-color="#e8d191"/>
+      <stop offset="0.52" stop-color="#f5e6b4"/>
+      <stop offset="0.72" stop-color="#d4af37"/>
+      <stop offset="0.9" stop-color="#9c7818"/>
+      <stop offset="1" stop-color="#6b4e0c"/>
+    </linearGradient>
+
+    <linearGradient id="tm-detent" x1="0" y1="23" x2="0" y2="33" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3a2a0c"/>
+      <stop offset="1" stop-color="#6f5415"/>
+    </linearGradient>
+
+    <linearGradient id="tm-eyelet" x1="0" y1="21" x2="0" y2="35" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6d0b31" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#a8305f" stop-opacity="0.5"/>
+    </linearGradient>
+
+    <linearGradient id="tm-underlap" x1="36" y1="0" x2="44" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6d0d33" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#6d0d33" stop-opacity="0"/>
     </linearGradient>
   </defs>
 
-  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#rim)"/>
-  <rect x="10" y="10" width="108" height="108" rx="24" fill="url(#tile)"/>
+  <!-- tile -->
+  <rect x="0" y="0" width="128" height="128" rx="29" fill="url(#tm-field)"/>
+  <rect x="0" y="0" width="128" height="128" rx="29" fill="url(#tm-teal)"/>
+  <rect x="0" y="0" width="128" height="128" rx="29" fill="url(#tm-bloom)"/>
 
-  <g id="thumbelina-glyph" transform="translate(0 2)">
-    <rect x="36" y="24" width="56" height="62" rx="12" fill="url(#body)"/>
-    <rect x="42" y="32" width="8" height="40" rx="4" fill="#ffffff" opacity="0.28"/>
-    <rect x="54" y="38" width="28" height="16" rx="3" fill="#fff0f6" opacity="0.9"/>
-    <rect x="57" y="43" width="22" height="3" rx="1.5" fill="#c9a227"/>
-    <rect x="48" y="84" width="32" height="18" rx="2.5" fill="url(#gold)" stroke="#8a6a12" stroke-width="1.25"/>
-    <rect x="53" y="89" width="7" height="8" rx="1" fill="#6d4c0f" opacity="0.55"/>
-    <rect x="68" y="89" width="7" height="8" rx="1" fill="#6d4c0f" opacity="0.55"/>
+  <!-- cast shadow, following the drive axis -->
+  <ellipse cx="0" cy="0" rx="45" ry="9" fill="url(#tm-cast)"
+           transform="translate(67 73) rotate(-30)"/>
+
+  <!-- glyph -->
+  <g transform="translate(64 64) scale(0.84) rotate(-30) translate(-61 -28)">
+    <rect x="34" y="4" width="84" height="48" rx="9" fill="url(#tm-shell)"/>
+    <rect x="34" y="30" width="84" height="22" rx="9" fill="url(#tm-base)"/>
+    <rect x="34" y="4" width="84" height="22" rx="9" fill="url(#tm-sheen)"/>
+    <rect x="36" y="13" width="8" height="30" fill="url(#tm-underlap)"/>
+    <rect x="105" y="21" width="6" height="14" rx="3" fill="url(#tm-eyelet)"
+          stroke="#d4af37" stroke-opacity="0.55" stroke-width="0.9"/>
+    <rect x="34.8" y="4.8" width="82.4" height="46.4" rx="8.4"
+          fill="none" stroke="url(#tm-bevel)" stroke-width="1.6"/>
+
+    <rect x="26" y="13" width="10" height="30" rx="2" fill="url(#tm-collar)"
+          stroke="#6b4e0c" stroke-opacity="0.3" stroke-width="0.8"/>
+
+    <rect x="4" y="15" width="24" height="26" rx="2" fill="url(#tm-plug)"
+          stroke="#7d5f10" stroke-opacity="0.32" stroke-width="0.9"/>
+    <rect x="6.2" y="16.6" width="1.4" height="22.8" rx="0.7" fill="#fffdf2" opacity="0.5"/>
+    <rect x="10" y="23" width="11" height="10" rx="2" fill="url(#tm-detent)"/>
+    <rect x="10.8" y="31.7" width="9.4" height="1" rx="0.5" fill="#fdf6de" opacity="0.55"/>
   </g>
+
+  <!-- gold rim on top of everything -->
+  <rect x="0.9" y="0.9" width="126.2" height="126.2" rx="28.2"
+        fill="none" stroke="url(#tm-rim)" stroke-width="1.5"/>
 </svg>

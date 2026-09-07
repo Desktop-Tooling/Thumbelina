@@ -2,6 +2,10 @@
 
 All notable functional changes to Thumbelina are listed here.
 
+## [0.3.3] — 2026-09-07
+
+Redraw SVG marks as a horizontal rose/gold USB silhouette (Opus design pass).
+
 ## [0.3.2] — 2026-09-07
 
 Simplify SVG marks to a USB drive in Thumbelina pink/gold.

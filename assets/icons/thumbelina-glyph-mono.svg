@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Thumbelina mono glyph - one evenodd path, inherits currentColor.
+  Same silhouette as thumbelina-glyph.svg: plug shell, collar, shell body,
+  with the plug detent and lanyard eyelet knocked out as holes.
+-->
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 128 128"
+     viewBox="0 0 122 56"
+     width="122" height="56"
+     fill="currentColor"
      role="img"
-     aria-label="Thumbelina"
-     fill="currentColor">
+     aria-label="Thumbelina">
   <title>Thumbelina</title>
-  <g id="thumbelina-glyph-mono">
-    <rect x="28" y="18" width="72" height="78" rx="14"/>
-    <rect x="46" y="92" width="36" height="22" rx="3"/>
-  </g>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="
+    M 6 15 H 28 V 13 H 34 A 9 9 0 0 1 43 4 H 109 A 9 9 0 0 1 118 13
+    V 43 A 9 9 0 0 1 109 52 H 43 A 9 9 0 0 1 34 43 H 28 V 41 H 6
+    A 2 2 0 0 1 4 39 V 17 A 2 2 0 0 1 6 15 Z
+    M 12 23 H 19 A 2 2 0 0 1 21 25 V 31 A 2 2 0 0 1 19 33
+    H 12 A 2 2 0 0 1 10 31 V 25 A 2 2 0 0 1 12 23 Z
+    M 108 21 A 3 3 0 0 1 111 24 V 32 A 3 3 0 0 1 105 32 V 24
+    A 3 3 0 0 1 108 21 Z"/>
 </svg>
