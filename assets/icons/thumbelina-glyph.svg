@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Thumbelina glyph  isolated mark (no app-tile background).
+  Motif: petal-boat with USB-A bow. Use on any surface / monochrome via currentColor-friendly fills in -mono if needed.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 200 140"
+     role="img"
+     aria-label="Thumbelina">
+  <title>Thumbelina</title>
+  <defs>
+    <linearGradient id="petalGrad" x1="20" y1="40" x2="160" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffb3d0"/>
+      <stop offset="45%" stop-color="#f06292"/>
+      <stop offset="100%" stop-color="#c2185b"/>
+    </linearGradient>
+    <linearGradient id="sepalGrad" x1="148" y1="58" x2="178" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#81c784"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
+    </linearGradient>
+    <linearGradient id="usbGrad" x1="174" y1="60" x2="198" y2="84" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#eceff1"/>
+      <stop offset="100%" stop-color="#90a4ae"/>
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="78" y1="28" x2="102" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffe082"/>
+      <stop offset="100%" stop-color="#f9a825"/>
+    </linearGradient>
+  </defs>
+
+  <g id="thumbelina-glyph">
+    <!-- soft water shadow under the boat -->
+    <ellipse cx="96" cy="118" rx="70" ry="10" fill="#0d47a1" opacity="0.18"/>
+
+    <!-- petal hull (boat)  open left, tapering to the USB bow on the right -->
+    <path id="petal"
+          fill="url(#petalGrad)"
+          d="M28 96
+             C28 62 58 34 96 34
+             C128 34 152 48 164 68
+             C168 74 168 82 162 86
+             C140 98 108 108 78 108
+             C54 108 34 104 28 96
+             Z"/>
+    <!-- petal rim highlight -->
+    <path fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round" opacity="0.55"
+          d="M40 88 C52 58 86 42 118 46 C138 48 152 58 160 70"/>
+
+    <!-- leaf/sepal collar where petal meets the plug -->
+    <path id="sepal"
+          fill="url(#sepalGrad)"
+          d="M152 70
+             C160 62 172 64 178 74
+             C182 80 180 90 172 94
+             C164 98 154 94 150 86
+             C148 80 148 74 152 70
+             Z"/>
+
+    <!-- USB-A male tip -->
+    <g id="usb">
+      <rect x="172" y="66" width="26" height="22" rx="2.5" fill="url(#usbGrad)" stroke="#607d8b" stroke-width="1.25"/>
+      <!-- metal tongue -->
+      <rect x="175" y="70" width="14" height="14" rx="1" fill="#78909c"/>
+      <!-- contact windows -->
+      <rect x="178" y="73" width="4.5" height="4.5" rx="0.6" fill="#37474f"/>
+      <rect x="178" y="80" width="4.5" height="4.5" rx="0.6" fill="#37474f"/>
+    </g>
+
+    <!-- Thumbelina figure (readable at mid size; still secondary to the boat+USB) -->
+    <g id="figure">
+      <!-- dress -->
+      <path fill="#1565c0"
+            d="M86 78
+               C84 92 82 104 90 108
+               C98 112 112 110 116 100
+               C118 92 114 80 108 76
+               C102 72 90 72 86 78
+               Z"/>
+      <!-- blouse hint -->
+      <ellipse cx="100" cy="76" rx="12" ry="7" fill="#e3f2fd"/>
+      <!-- head -->
+      <circle cx="100" cy="58" r="11" fill="#ffccbc"/>
+      <!-- hair -->
+      <path fill="url(#hairGrad)"
+            d="M88 58
+               C86 44 96 38 106 40
+               C114 42 116 52 112 60
+               C118 56 120 64 112 68
+               C106 66 98 66 92 64
+               C88 66 86 62 88 58
+               Z"/>
+      <!-- arm resting on petal rim -->
+      <path fill="#ffccbc"
+            d="M112 82 C120 80 128 84 132 88 C128 90 120 88 114 86 Z"/>
+    </g>
+
+    <!-- tiny butterfly  autonomy / flight -->
+    <g id="butterfly" transform="translate(48 28)">
+      <ellipse cx="-5" cy="0" rx="7" ry="4.5" fill="#fafafa" stroke="#455a64" stroke-width="0.8" transform="rotate(-25)"/>
+      <ellipse cx="5" cy="0" rx="7" ry="4.5" fill="#fafafa" stroke="#455a64" stroke-width="0.8" transform="rotate(25)"/>
+      <circle cx="0" cy="0" r="1.4" fill="#37474f"/>
+    </g>
+  </g>
+</svg>

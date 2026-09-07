@@ -2,6 +2,12 @@
 
 All notable functional changes to Thumbelina are listed here.
 
+## [0.3.1] — 2026-09-07
+
+New SVG marks: isolated glyph, app-tile mark, mono badge.
+
+Details: [changelog/2026-09-07 - svg marks.md](changelog/2026-09-07%20-%20svg%20marks.md)
+
 ## [0.3.0] â€” 2026-09-07
 
 Rebrand to **Thumbelina** with product icon and public-domain Andersen art.

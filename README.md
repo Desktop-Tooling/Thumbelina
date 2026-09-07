@@ -76,7 +76,15 @@ thumbelina helper-script --mode both --disk 2 --out ./helper
   <img src="assets/brand/thumbelina-icon.png" alt="Thumbelina product icon" width="280" />
 </p>
 
-Product icon: original art (petal boat with USB tip). Raster master plus sizes under [`assets/icons/`](assets/icons/); a simplified SVG mark is [`assets/icons/thumbelina-mark.svg`](assets/icons/thumbelina-mark.svg) for places that need vectors.
+Product face: painted PNG under [`assets/brand/`](assets/brand/) (sizes in [`assets/icons/`](assets/icons/)).
+
+SVG marks (original vector, not a PNG trace):
+
+| File | Use |
+| --- | --- |
+| [`thumbelina-glyph.svg`](assets/icons/thumbelina-glyph.svg) | **Isolated** petal-boat + USB (no rounded tile) |
+| [`thumbelina-mark.svg`](assets/icons/thumbelina-mark.svg) | Same glyph on a gold-rimmed app tile |
+| [`thumbelina-glyph-mono.svg`](assets/icons/thumbelina-glyph-mono.svg) | Single-color / `currentColor` badge |
 
 ### Public-domain companions (README decoration)
 
