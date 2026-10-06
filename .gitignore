@@ -44,3 +44,5 @@ machine.md
 .env
 .env.*
 *.local.ps1
+!/.editorconfig
+!/.gitattributes
